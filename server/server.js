@@ -10,19 +10,26 @@ const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 
-const allowedOrigins = process.env.ORIGIN?.split(",") || [];
+// const allowedOrigins = process.env.ORIGIN?.split(",") || [];
 
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     if (!origin) return callback(null, true);
+
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     } else {
+//       return callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
+// }));
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
+  origin: [
+    "http://localhost:5173",
+    "https://real-estate-five-woad.vercel.app"
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
